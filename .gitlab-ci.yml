@@ -1,0 +1,19 @@
+image: docker:latest
+
+stages:
+  - deploy
+
+markepto-front:
+  stage: deploy
+  tags:
+    - finland
+    
+  script:
+    - echo NEXT_PUBLIC_API_URL="https://api.markepto.com/v1/" > .env.production
+    - docker build -t markepto-front-prod-$CI_COMMIT_BEFORE_SHA -f Dockerfile .
+    - docker ps --filter name=markepto-front-prod* -aq | xargs docker stop | xargs docker rm || true
+    - docker images | grep -v markepto-front-prod-$CI_COMMIT_BEFORE_SHA  | grep markepto-front-prod | awk '{print $1}' | xargs docker rmi || true
+    - docker run --restart=always --name markepto-front-prod -d -p 4000:3000 -t markepto-front-prod-$CI_COMMIT_BEFORE_SHA
+  
+  only:
+    - master

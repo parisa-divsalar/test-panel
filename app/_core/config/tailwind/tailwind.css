@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .loader {
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 3px solid #ed775b;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@layer components {
+    .my-container {
+        @apply max-w-[1408px] mx-auto;
+    }
+    .my-containerNew {
+        @apply max-w-[1708px] mx-auto;
+    }
+
+    .filter-item-button {
+        @apply flex items-center gap-4 justify-start w-full cursor-pointer hover:opacity-75 text-base text-secondary-800 font-medium;
+    }
+
+    .filter-item-button > input {
+        @apply w-4 h-4 rounded accent-main border-secondary-500;
+    }
+}

@@ -1,4 +1,3 @@
-
 const ColorPallet = (themeMode: string) => {
     ///primary=blue range color
 
@@ -59,11 +58,11 @@ const ColorPallet = (themeMode: string) => {
         600: '#FAFAFA',
         700: '#FBFBFB',
         800: '#FDFDFD',
-        900: '#FEFEFE',
+        900: '#000',
     }
 
     const whiteDark = {
-        50: '#FEFEFE',
+        50: '#000',
         100: '#EDEDED',
         200: '#FBFBFB',
         300: '#FAFAFA',

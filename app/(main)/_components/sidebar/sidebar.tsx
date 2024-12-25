@@ -1,59 +1,52 @@
 'use client'
 
-import React from 'react'
-import {
-    AccountIcon,
-    DashboardIcon,
-    MenuIcon,
-    SettingIcon,
-} from '../icon/icon'
+import { useAppSelector } from '@/app/_core/redux/hooks'
+import { Box, IconButton, Typography } from '@mui/material'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
+import { AccountIcon, DashboardIcon, MenuIcon, SettingIcon } from '../icon/icon'
 
 export const Sidebar = () => {
-
-    const { t } = useTranslation('sidebar');
+    const { t } = useTranslation('sidebar')
+    const theme = useAppSelector((state) => state.isDarkMode.dark)
 
     const path = usePathname() || ''
 
     const showSidebar = true
-    const handleToggleSidebar = () => {
-
-
-    }
+    const handleToggleSidebar = () => {}
 
     return (
-        <div
-           className={"md:w-[275px] overflow-hidden hidden md:flex bg-background" }
+        <Box
+            component={'div'}
+            className={'md:w-[275px] overflow-hidden hidden md:flex '}
         >
-            <div
-                className={
-                    ' justify-left flex  border-b border-gray-900 py-3 flex items-center px-6  absolute top-0 bg-background w-[285px] z-10 h-[60px]'
-                }
+            <Box
+                sx={{ borderBottom: '1px solid', borderBottomColor: 'grey.900' }}
+                className={' justify-left flex   py-3  items-center px-6  absolute top-0  w-[275px] z-10 h-[60px]'}
             >
-                <div>
-                    <button
+                <Box>
+                    <IconButton
+                        sx={{ color: 'grey.900' }}
                         className='border flex justify-center'
-                        onClick={handleToggleSidebar}
                     >
-                        <MenuIcon />
-                    </button>
-                </div>
-
-            </div>
-            <div
+                        <MenuIcon color={theme ? '#fff' : '#3E3E3E'} />
+                    </IconButton>
+                </Box>
+            </Box>
+            <Box
                 className={`${showSidebar ? 'w-[275px]' : 'w-[75px] overflow-hidden '}  ${
                     !showSidebar ? 'mt-[73px]' : 'mt-[69px]'
                 } `}
             >
-                <div className={`px-6 py-4 overflow-hidden relative `}>
-
-                    <div
+                <Box
+                    component={'div'}
+                    className={`px-6 py-4 overflow-hidden relative `}
+                >
+                    <Box
                         className={`flex items-center py-3 mt-[20px]`}
                         onClick={() => {
                             if (!showSidebar) {
-
                             }
                         }}
                     >
@@ -61,78 +54,98 @@ export const Sidebar = () => {
                             href={`/`}
                             className='flex'
                         >
-                            <span className={'pr-3 flex items-center'}>
-                                <DashboardIcon color={path === '/' ? '#42BBFF' : '#fff'} />
-                            </span>
+                            <Typography
+                                component={'span'}
+                                sx={{ color: 'grey.900' }}
+                                className={'pr-3 flex items-center'}
+                            >
+                                <DashboardIcon color={path === '/' ? '#42BBFF' : theme ? '#fff' : '#3E3E3E'} />
+                            </Typography>
                             {showSidebar && (
-                                <div
-                                    className={`flex items-center mt-[3px] text-white`}
+                                <Box
+                                    color={'grey.900'}
+                                    component={'div'}
+                                    className={`flex items-center mt-[3px] `}
                                 >
                                     {t('Dashboard')}
-
-                                </div>
+                                </Box>
                             )}
                         </Link>
-                    </div>
+                    </Box>
+                </Box>
 
-                </div>
-
-                <div className={'px-6 pb-4  '}>
+                <Box
+                    component={'div'}
+                    className={'px-6 pb-4  '}
+                >
                     <Link href={`/profile`}>
-                        <div
+                        <Box
                             className={`flex items-center py-3 ${!showSidebar && 'mt-[9px]'}`}
                             onClick={() => {
                                 if (!showSidebar) {
-
                                 }
                             }}
                         >
-                            <span className={'pr-3 flex items-center'}>
-                                <AccountIcon color={path.startsWith('/profile') ? '#42BBFF' : '#fff'} />
-                            </span>
+                            <Typography
+                                component={'span'}
+                                sx={{ color: 'grey.900' }}
+                                className={'pr-3 flex items-center'}
+                            >
+                                <AccountIcon
+                                    color={path.startsWith('/profile') ? '#42BBFF' : theme ? '#fff' : '#3E3E3E'}
+                                />
+                            </Typography>
 
                             {showSidebar && (
-                                <div
-                                    className={'text-gray-400 flex items-center mt-[3px] text-white'}
+                                <Box
+                                    color={'grey.900'}
+                                    component={'div'}
+                                    className={' flex items-center mt-[3px] '}
                                 >
                                     {t('Profile')}
-
-                                </div>
+                                </Box>
                             )}
-                        </div>
+                        </Box>
                     </Link>
-                    <div
+                    <Box
                         className={`border-b border-dashed border-gray-800 h-[1px] opacity-40 pt-2 ${
                             !showSidebar && 'mt-[5px] -ml-1'
                         } `}
                     />
-                </div>
+                </Box>
 
-                <div className={'px-6 pb-4'}>
-
+                <Box
+                    component={'div'}
+                    className={'px-6 pb-4'}
+                >
                     <Link href={`/setting`}>
-                        <div
+                        <Box
                             className={`flex items-center py-3 ${!showSidebar && 'mt-1'}`}
-                            onClick={() => {
-
-                            }}
+                            onClick={() => {}}
                         >
-                            <span className={'pr-3 flex items-center'}>
-                                <SettingIcon color={path.startsWith('/setting') ? '#42BBFF' : '#fff'} />
-                            </span>
+                            <Typography
+                                component={'span'}
+                                sx={{ color: 'grey.900' }}
+                                className={'pr-3 flex items-center'}
+                            >
+                                <SettingIcon
+                                    color={path.startsWith('/setting') ? '#42BBFF' : theme ? '#fff' : '#3E3E3E'}
+                                />
+                            </Typography>
 
                             {showSidebar && (
-                                <div
-                                    className={'text-gray-400 flex items-center mt-[3px] text-white'}
+                                <Box
+                                    color={'grey.900'}
+                                    component={'div'}
+                                    className={' flex items-center mt-[3px] '}
                                 >
                                     {t('Setting')}
-
-                                </div>
+                                </Box>
                             )}
-                        </div>
+                        </Box>
                     </Link>
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     )
 }

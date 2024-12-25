@@ -1,18 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
-import {
-    Cube,
-    LogOutIcon,
-    RingIcon,
-    SunIcon,
-} from '@/app/(main)/_components/icon/icon'
-import Image from 'next/image'
 import { HeaderPresenter } from '@/app/(main)/_components/header/header.presenter'
+import { Cube, LogOutIcon, RingIcon, SunIcon } from '@/app/(main)/_components/icon/icon'
+import { useAppSelector } from '@/app/_core/redux/hooks'
+import { isDarkMode } from '@/app/_core/redux/theme/theme'
+import { Box, Button, Typography } from '@mui/material'
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
 import CustomSwitchButton from '../custom-switch-button/custom-switch-button'
 import { NotificationModal } from '../notification-modal/notification-modal'
-import { useTranslation } from 'react-i18next';
-import { useTheme } from 'next-themes';
-import { useDispatch } from 'react-redux'
-import { isDarkMode } from '@/app/_core/redux/theme/theme'
 interface User {
     access_token: string
     first_name?: string
@@ -36,23 +32,23 @@ const Header = () => {
         openModal: boolean
         setOpenModal: any
     } = HeaderPresenter()
+    const theme = useAppSelector((state) => state.isDarkMode.dark)
 
     const [selected, setSelected] = useState(false)
     const [darkMode, setDarkMode] = useState(false)
     const [logOutModal, setLogOutModal] = useState(false)
-    const { i18n } = useTranslation();
-    const { t } = useTranslation('sidebar');
+    const { i18n } = useTranslation()
+    const { t } = useTranslation('sidebar')
     const modalRef: any = useRef(null)
     const switchLanguage = (lng: string) => {
-        i18n.changeLanguage(lng);
-        document.documentElement.dir = lng === 'fa' ? 'rtl' : 'ltr';
-    };
+        i18n.changeLanguage(lng)
+        document.documentElement.dir = lng === 'fa' ? 'rtl' : 'ltr'
+    }
     const dispatch = useDispatch()
 
     useEffect(() => {
-        document.documentElement.dir = i18n.language === 'fa' ? 'rtl' : 'ltr';
-    }, [i18n.language]);
-
+        document.documentElement.dir = i18n.language === 'fa' ? 'rtl' : 'ltr'
+    }, [i18n.language])
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -70,17 +66,22 @@ const Header = () => {
         }
     }, [openModal, setOpenModal])
 
-
     return (
-        <div className='hidden md:flex  pt-4 mb-3 flex justify-end w-full bg-background'>
+        <div className='hidden md:flex  pt-4 mb-3  justify-end w-full'>
             {/* <Search /> */}
             <div className='flex items-center gap-3 px-10'>
-                <SunIcon aria-label='SunIcon' />
+                <SunIcon
+                    aria-label='SunIcon'
+                    color={theme ? '#fff' : '#3E3E3E'}
+                />
                 <button
                     className={'px-1'}
                     onClick={() => setSelected(true)}
                 >
-                    <RingIcon aria-label='Notifications' />
+                    <RingIcon
+                        aria-label='Notifications'
+                        color={theme ? '#fff' : '#3E3E3E'}
+                    />
                 </button>
 
                 {selected && <NotificationModal setSelected={setSelected} />}
@@ -103,7 +104,7 @@ const Header = () => {
                     {openModal && (
                         <div
                             ref={modalRef}
-                            className={`absolute z-[1000] top-4 p-3 bg-background gap-3.5 right-0 rounded items-between justify-between w-[284px] mt-3  shadow-[0px_0px_4px_0px_#B9B9B940] w-[140px] flex-col`}
+                            className={`absolute z-[1000] top-4 p-3  gap-3.5 right-0 rounded items-between justify-between w-[284px] mt-3  shadow-[0px_0px_4px_0px_#B9B9B940] flex-col`}
                         >
                             <div className='flex gap-3 mt-1'>
                                 <Image
@@ -127,68 +128,89 @@ const Header = () => {
                                     <Cube color='#42BBFF' />
                                 </div>
                             </div>
-                            <div className={"flex items-center pt-4 gap-2"}>
+                            <div className={'flex items-center pt-4 gap-2'}>
                                 <button
                                     onClick={() => switchLanguage('fa')}
-                                    className={`p-1 text-sm rounded ${i18n.language === 'fa' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                                    className={`p-1 text-sm rounded ${
+                                        i18n.language === 'fa' ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                                    }`}
                                 >
                                     فارسی
                                 </button>
                                 <button
                                     onClick={() => switchLanguage('en')}
-                                    className={`p-1 text-sm rounded ${i18n.language === 'en' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                                    className={`p-1 text-sm rounded ${
+                                        i18n.language === 'en' ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                                    }`}
                                 >
                                     English
                                 </button>
                             </div>
                             <div className={'flex items-center justify-between py-4'}>
-                                <span className={'text-sm'}>{t("DarkTheme")}</span>
-                                <CustomSwitchButton onChange={(event => {
-                                    setDarkMode(event.target.checked)
-                                    dispatch(isDarkMode({ dark:event.target.checked }))
-                                })} isChecked={darkMode} />
-                               </div>
+                                <span className={'text-sm'}>{t('DarkTheme')}</span>
+                                <CustomSwitchButton
+                                    onChange={(event) => {
+                                        setDarkMode(event.target.checked)
+                                        dispatch(isDarkMode({ dark: event.target.checked }))
+                                    }}
+                                    isChecked={darkMode}
+                                />
+                            </div>
                             <button
                                 onClick={() => setLogOutModal(true)}
                                 className={'flex items-center gap-2'}
                             >
-                                <span className={'text-sm '}>{t("LogOut")}</span>
+                                <span className={'text-sm '}>{t('LogOut')}</span>
                             </button>
                             {logOutModal && (
-                                <div
+                                <Box
+                                    component={'div'}
                                     onClick={(e) => e.target === e.currentTarget && setLogOutModal(false)}
                                     className={
                                         'fixed top-0 right-0 backdrop-blur flex justify-center items-center w-full h-full z-40'
                                     }
                                 >
-                                    <div className='rounded-[20px] bg-gray-900 w-[434px] py-7 px-[53px] flex justify-center flex-col items-center'>
+                                    <Box
+                                        sx={{ backgroundColor: 'white.50' }}
+                                        component={'div'}
+                                        className='rounded-[20px]  w-[434px] py-7 px-[53px] flex justify-center flex-col items-center'
+                                    >
                                         <LogOutIcon color='#FF3F64' />
 
-                                        <span className='text-xl text-red-500 pt-2 pb-1'>Log Out</span>
-                                        <span className='text-lg text-gray-400 w-[240px]'>
+                                        <Typography className='text-xl text-red-500 pt-2 pb-1'>Log Out</Typography>
+                                        <Typography
+                                            color={'grey.600'}
+                                            className='text-lg  w-[240px]'
+                                        >
                                             Are you sure you want to log out?
-                                        </span>
+                                        </Typography>
 
-                                        <div className='flex gap-4 mt-7'>
-                                            <button
-                                                className='w-[127px] h-[40px] bg-gray-700 text-base rounded text-white'
+                                        <Box
+                                            component={'div'}
+                                            className='flex gap-x-4  mt-6 w-full'
+                                        >
+                                            <Button
+                                                className='w-full'
+                                                variant='contained'
                                                 onClick={() => setLogOutModal(false)}
                                             >
                                                 Cancel
-                                            </button>
+                                            </Button>
 
-                                            <button
-                                                className='w-[127px] h-[40px] bg-red-500 text-base rounded text-white'
+                                            <Button
+                                                className='w-full'
+                                                variant='contained'
+                                                color='error'
                                                 onClick={() => {
                                                     logOut()
                                                     setLogOutModal(false)
                                                 }}
                                             >
                                                 Yes
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                            </Button>
+                                        </Box>
+                                    </Box>
+                                </Box>
                             )}
                         </div>
                     )}

@@ -1,11 +1,9 @@
 'use client'
 
-import React from 'react'
-import { SettingIcon, SunIcon } from '../_components/icon/icon'
-import CustomSwitchButton from '../_components/custom-switch-button/custom-switch-button'
-import { CustomInputSelect } from '../_components/custom-input/custom-input-select'
-import { CustomInput } from '../_components/custom-input/custom-input'
 import { CustomInputMUI } from '../_components/custom-input/custom-input-mui'
+import { CustomInputSelect } from '../_components/custom-input/custom-input-select'
+import CustomSwitchButton from '../_components/custom-switch-button/custom-switch-button'
+import { SettingIcon, SunIcon } from '../_components/icon/icon'
 
 export default function SettingPage() {
     return (
@@ -22,7 +20,7 @@ export default function SettingPage() {
                 </div>
                 <div className='mt-6'>
                     <span className='text-base text-secondary-200'>General Details</span>
-                    <div className='bg-background rounded mt-3 px-4 md:px-[30px] py-4 mb-4'>
+                    <div className=' rounded mt-3 px-4 md:px-[30px] py-4 mb-4'>
                         <span className='text-xs md:text-base text-secondary-100 '>Appearance</span>
                         <div className='mt-2 md:mt-5 '>
                             <span className='text-xs md:text-sm text-secondary-100 '>Dark mode</span>
@@ -44,12 +42,12 @@ export default function SettingPage() {
                     </div>
 
                     <span className='text-base text-secondary-200 '>Time zone</span>
-                    <div className='bg-background rounded mt-3 px-4 md:px-[30px] py-[26px] mb-4'>
+                    <div className=' rounded mt-3 px-4 md:px-[30px] py-[26px] mb-4'>
                         <CustomInputSelect label='country' />
                     </div>
 
                     <span className='text-base text-secondary-200'>Notification</span>
-                    <div className='bg-background rounded mt-3 px-4 md:px-[30px] py-4 mb-4'>
+                    <div className=' rounded mt-3 px-4 md:px-[30px] py-4 mb-4'>
                         <span className='text-sm text-secondary-100'>Enable Desktop Notification</span>
                         <div className='mt-1 flex justify-between items-center mb-5'>
                             <span className='text-xs text-[#A3A3A3] '>Receive desktop notifications</span>
@@ -72,7 +70,7 @@ export default function SettingPage() {
                     </div>
 
                     <span className='text-base text-secondary-200 '>Security</span>
-                    <div className='bg-background rounded mt-3 md:px-[30px] py-[26px] mb-4 flex flex-col items-center md:flex-row gap-[30px]'>
+                    <div className=' rounded mt-3 md:px-[30px] py-[26px] mb-4 flex flex-col items-center md:flex-row gap-[30px]'>
                         <CustomInputMUI
                             id='name'
                             maxlength={50}

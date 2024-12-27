@@ -1,8 +1,8 @@
 'use client'
 
-import { CustomInputModel } from './custom-input.model'
 import { CloseEyeIcon, FalseIcon, OpenEyeIcon, TrueIcon } from '@/app/(main)/_components/icon/icon'
 import { useState } from 'react'
+import { CustomInputModel } from './custom-input.model'
 
 export const CustomInput = (props: CustomInputModel) => {
     const { label, value, onChange, id, defaultValue, placeholder, error, className, ltr, maxlength, require, type } =
@@ -24,7 +24,10 @@ export const CustomInput = (props: CustomInputModel) => {
                 value={value}
                 maxLength={maxlength}
                 defaultValue={defaultValue}
-                onChange={(event) => onChange(event.target.value as string)}
+                onChange={(event) => {
+                    console.log(event.target.value)
+                    onChange(event.target.value as string)
+                }}
                 className={`h-[3.25rem] border-[1px] rounded-lg outline-none px-4 placeholder:!text-right bg-transparent border-gray-300 text-gray-500 ${
                     error && 'border-red-500'
                 }`}
@@ -38,11 +41,14 @@ export const CustomInput = (props: CustomInputModel) => {
             ) : (
                 <>
                     {error ? (
-                        <span className={'absolute right-3 top-[44%]'}>
+                        <span
+                            onClick={() => onChange('')}
+                            className={'absolute right-3 top-[25%] cursor-pointer'}
+                        >
                             <FalseIcon />
                         </span>
                     ) : (
-                        <span className={'absolute right-3 top-[60%]'}>{value?.length > 0 && <TrueIcon />}</span>
+                        <span className={'absolute right-3 top-[40%]'}>{value?.length > 0 && <TrueIcon />}</span>
                     )}
                 </>
             )}

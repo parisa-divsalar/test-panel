@@ -1,16 +1,14 @@
 'use client'
 
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { GalleryAddIcon, ProfileRoundedIcon } from '../_components/icon/icon'
-import { CustomInput } from '../_components/custom-input/custom-input'
-import { CircularProgress, TextField } from '@mui/material'
-import { CustomInputMUI } from '../_components/custom-input/custom-input-mui'
-import { ProfilePresenter } from './profile.presenter'
-import { useSelector } from 'react-redux'
+import API_SERVICE_CLIENT from '@/app/_core/service/api-service-client'
+import { CircularProgress } from '@mui/material'
+import React, { useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import API_SERVICE_CLIENT from '@/app/_core/service/api-service-client'
+import { useSelector } from 'react-redux'
+import { CustomInputMUI } from '../_components/custom-input/custom-input-mui'
+import { GalleryAddIcon, ProfileRoundedIcon } from '../_components/icon/icon'
+import { ProfilePresenter } from './profile.presenter'
 
 export default function ProfilePage() {
     const { formik, isLoading, userId } = ProfilePresenter()
@@ -71,10 +69,10 @@ export default function ProfilePage() {
                     <div className={'text-white flex items-center mt-[3px]'}>Profile</div>
                 </div>
 
-				<div className='flex justify-center mt-4 md:mt-14'>
-					<div className='w-[687px] md:bg-background md:px-11 md:py-9'>
-						<div className='flex gap-6 items-center justify-center md:justify-start'>
-							<span className='text-lg text-white hidden md:flex'>Avatar</span>
+                <div className='flex justify-center mt-4 md:mt-14'>
+                    <div className='w-[687px]  md:px-11 md:py-9'>
+                        <div className='flex gap-6 items-center justify-center md:justify-start'>
+                            <span className='text-lg text-white hidden md:flex'>Avatar</span>
                             <div className='bg-gray-900 rounded-full flex flex-col items-center justify-center w-[110px] h-[110px] shadow-[0px_3px_12px_-6px_#565656,0px_1px_0px_0px_#565656,0px_0px_0px_1px_#565656]'>
                                 {/* <input
                                     type='file'

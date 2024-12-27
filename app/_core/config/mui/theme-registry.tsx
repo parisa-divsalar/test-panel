@@ -1,16 +1,18 @@
 'use client'
 
 import createCache from '@emotion/cache'
-import CssBaseline from '@mui/material/CssBaseline'
-import { theme } from './theme'
-import { useState } from 'react'
 import { CacheProvider } from '@emotion/react'
+import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import { useServerInsertedHTML } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useAppSelector } from '../../redux/hooks'
+import { theme } from './theme'
 
 export default function ThemeRegistry(props: any) {
     const { options, children } = props
-
+    const themeMode = useAppSelector((s) => s.isDarkMode.dark)
+    console.log(themeMode)
     const [{ cache, flush }] = useState(() => {
         const cache = createCache(options)
         cache.compat = true
@@ -51,9 +53,13 @@ export default function ThemeRegistry(props: any) {
         )
     })
 
+    useEffect(() => {
+        console.log(theme, 'sadksadjiasdijadsjidasjasjiidsajiads')
+    }, [themeMode])
+
     return (
         <CacheProvider value={cache}>
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={themeMode ? theme('dark') : theme('light')}>
                 <CssBaseline />
                 {children}
             </ThemeProvider>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
 import CustomCheckbox from '@/app/(main)/_components/UI/custom-checkbox/custom-checkbox'
+import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { CloseIcon } from '@/app/(main)/_components/icon/icon'
 
 interface Option {
     id: number // assuming id is a number
@@ -118,7 +117,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
             ref={selectRef}
         >
             <div
-                className={`flex gap-2 items-center justify-start h-[48px] overflow-hidden px-2.5 pb-2.5 pt-4 w-full text-sm outline outline-1 outline-gray-300 text-white rounded-md bg-background shadow-[0px_3px_12px_-6px_#565656,0px_1px_0px_0px_#565656,0px_0px_0px_1px_#565656] rounded-lg appearance-none dark:text-white focus:outline-none focus:ring-0 focus:border-main peer cursor-pointer`}
+                className={`flex gap-2 items-center justify-start h-[48px] overflow-hidden px-2.5 pb-2.5 pt-4 w-full text-sm outline outline-1 outline-gray-300 text-white   shadow-[0px_3px_12px_-6px_#565656,0px_1px_0px_0px_#565656,0px_0px_0px_1px_#565656] rounded-lg appearance-none dark:text-white focus:outline-none focus:ring-0 focus:border-main peer cursor-pointer`}
                 onClick={toggleDropdown}
             >
                 <div className={'w-full'}>
@@ -149,7 +148,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
                 </div>
             </div>
             {isOpen && (
-                <div className='absolute z-20 w-full bg-background rounded-lg shadow-lg mt-1 max-h-[200px] overflow-auto'>
+                <div className='absolute z-20 w-full rounded-lg shadow-lg mt-1 max-h-[200px] overflow-auto'>
                     {filterOption(options).map((option, index) => (
                         <div
                             key={option.id}
@@ -174,7 +173,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
                 htmlFor={`id-${name}`}
                 className={`absolute ${
                     selectedOption ? 'h-[20px] text-main !text-[10px] -translate-y-4 top-2' : 'top-1/2 -translate-y-1/2'
-                } peer-focus:text-main text-sm text-gray-500 dark:text-gray-400 duration-300 transform z-10 origin-[0] bg-background dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-focus:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-4 start-1 cursor-pointer`}
+                } peer-focus:text-main text-sm text-gray-500 dark:text-gray-400 duration-300 transform z-10 origin-[0]  dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-focus:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-4 start-1 cursor-pointer`}
                 onClick={toggleDropdown}
             >
                 {label}

@@ -13,12 +13,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <Box
                 sx={{ backgroundColor: 'white.50' }}
                 component={'div'}
-                className={`flex h-[100vh] w-screen`}
+                className={`flex h-svh w-screen`}
             >
                 <Box
-                    sx={{ backgroundColor: 'white.50' }}
+                    sx={{ backgroundColor: 'white.50', border: '1px solid ', borderColor: 'grey.500' }}
                     component={'div'}
-                    className='flex-shrink-0 border'
+                    className='flex-shrink-0 '
                 >
                     {path !== '/' && <Sidebar />}
                 </Box>

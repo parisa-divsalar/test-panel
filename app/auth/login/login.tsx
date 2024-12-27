@@ -46,7 +46,7 @@ export const Login = () => {
                     onChange={(event) => formik.setFieldValue('mobileNumber', event)}
                 />
                 <Button
-                    className='my-4'
+                    className='flex flex-col items-center justify-center'
                     onClick={() => formik.handleSubmit()}
                     disabled={isDisabled}
                     variant='contained'

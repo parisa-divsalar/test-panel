@@ -51,7 +51,7 @@ export const Home = ({}: HomePageModel) => {
                     variant='contained'
                     sx={{ backgroundColor: 'prime.200', color: 'grey.800' }}
                 >
-                    تعییر تم
+                    تغییر تم
                 </Button>{' '}
             </Box>
             <Box
@@ -66,7 +66,7 @@ export const Home = ({}: HomePageModel) => {
                     Your Title
                 </Typography>
                 <Image
-                    className='scale-75'
+                    className='scale-75 mt-3'
                     alt=''
                     fill
                     src={'/img/crypto-bg.png'}
